@@ -108,72 +108,31 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKScriptMessage
     
     
     func setWebViewAnimation() {
-//
-//        animationView_1.frame = CGRect(x: view.frame.minX , y: view.frame.minY, width: view.frame.width / 2, height: view.frame.height / 8)//view.frame
-        print("animationView_1.frame = \(animationView_1.frame), view.frame.height= \(view.frame.height), view.frame.width = \(view.frame.width) , view.frame.y = \(view.frame.minY) ,  view.frame.x  = \( view.frame.minX )")
         
-//        animationView_1.translatesAutoresizingMaskIntoConstraints = false
-        
-        var constraints = [NSLayoutConstraint]()
-        constraints.append(NSLayoutConstraint(item: animationView_1, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0))
-        constraints.append(NSLayoutConstraint(item: animationView_1, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 0))
-        constraints.append(NSLayoutConstraint(item: animationView_1, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: 0))
-        constraints.append(NSLayoutConstraint(item: animationView_1, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 0))
+        let height = view.frame.width * (3 / 2)
+        let centerY = (view.frame.height - view.frame.width * (3 / 2)) / 2
+        animationView_1.frame = CGRect(x: 0 , y: centerY , width: view.frame.width , height: height)
+
         animationView_1.backgroundColor = .black //.clear //.black
         animationView_1.play()
         animationView_1.loopAnimation = true
         
         webView.backgroundColor = .black
-        let sublayers = view.layer.sublayers!
-        print("sublayers.count = \(sublayers.count)")
-        animationView_1.layer.zPosition = CGFloat(sublayers.count + 1)
-        animationView_1.frame = view.frame
+//        let sublayers = view.layer.sublayers!
+//        print("sublayers.count = \(sublayers.count)")
+//        animationView_1.layer.zPosition = CGFloat(sublayers.count + 1)
+//        animationView_1.frame = view.frame
         webView.addSubview(animationView_1)
-        
-        animationView_1.play{ (finished) in
-            print("123")
-        }
-        
 //
+
+        
+//        Lottie official example
 //        let animationView = LOTAnimationView(name: "LottieLogo")
 //        self.view.addSubview(animationView)
 //        animationView.play{ (finished) in
 //            // Do Something
 //        }
-//
-//        progressView.layer.zPosition = CGFloat(sublayers.count + 11)
-//
-//        webView.addSubview(progressView)
-//
-//        progressView.translatesAutoresizingMaskIntoConstraints = false
-//        progressView.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor).isActive = true
-//        progressView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-//        progressView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-//        progressView.progressTintColor = UIColor(red: 22/255, green: 249/255, blue: 32/255, alpha: 1.0)
-//
-//
-        if isShowCover_ {
-            buttonImageBlock()
-            buttonBlock.addTarget(self, action: #selector(WebViewController.whenButtonTouched(_:)), for: .touchUpInside)
-        }
-    }
-    func buttonImageBlock() {
-        let sublayers = view.layer.sublayers!
-        buttonBlock.frame = view.frame
-        buttonBlock.layer.zPosition = CGFloat(sublayers.count + 12)
-        
-        let imageUrl = UIImage(data: data_)
-        buttonBlock.setBackgroundImage(imageUrl, for: .normal)
-        webView.addSubview(buttonBlock)
-        
-        
-        //        webImageBlock.addSubview(animationView_1)
-    }
-    var newUrl_ = String()
-    @objc func whenButtonTouched(_ : UIButton) {
-        if newUrl_ != "" {
-            UIApplication.shared.openURL(URL(string: newUrl_)!)
-        }
+
     }
     // MARK: - WKNavigationDelegate
     
